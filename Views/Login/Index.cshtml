@@ -1,0 +1,38 @@
+﻿@model UserModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<form method="post" asp-controller="Login" asp-action="LoginMethod">
+    @if(TempData["messageError"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["messageError"]
+        </div>
+    }
+    
+    <div class="border border-dark p-5 mt-lg-5">
+        <div class="text-center">
+            <h1 class="display-4">Logar no sistema</h1>
+        </div>
+        <div class="row mb-lg-3">
+            <div class="col text-center">
+                <input type="text" placeholder="Digite seu email" class="form-control" asp-for="Email"/>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <input type="password" placeholder="Senha" class="form-control" asp-for="Password" />
+            </div>
+        </div>
+        <div class="d-grid gap-2 mt-3">
+            <button class="btn btn-success" type="submit">Entrar</button>
+            <button class="btn btn-secondary" type="button">Registrar-se</button>
+        </div>
+    </div>
+</form>
+

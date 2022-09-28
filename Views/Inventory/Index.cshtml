@@ -1,0 +1,83 @@
+﻿@model EstoqueViewModel
+
+@*
+    Para passar mais de uma model para uma view, é dever criar uma model para juntar todas as models necessárias
+*@
+
+@{
+}
+
+<h1 class="display-4 text-center">Enviar novo estoque</h1>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Novo cadastro
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cadastro de Produtos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-controller="Inventory" asp-action="CreateNewProduct" method="post">
+            <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Nome do produto" asp-for="estoque.name">
+                        </div>
+                        <div class="col">
+                            <input type="number" class="form-control" placeholder="Preço" asp-for="estoque.price"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <textarea class="form-control" rows="10" cols="20" placeholder="Descrição" asp-for="estoque.description"></textarea>
+                        </div>
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" >Save changes</button>
+            </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<table class="table table-striped table-sm table-responsive">
+    <thead>
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Preço</th>
+            <th scope="col">Descrição</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (EstoqueModel inventory in Model.estoqueList)
+        {
+            <tr>
+                <th scope="row">@inventory.name</th>
+                <td>@inventory.price</td>
+                <td>@inventory.description</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a type="button" class="btn btn-primary" asp-controller="Inventory" asp-action="Edit" asp-route-id=@inventory.id>Editar</a>
+                        <a type="button" class="btn btn-danger" asp-controller="Inventory" asp-action="RemoveEstoque" asp-route-id=@inventory.id>Excluir</a>
+                    </div>
+                </td>
+            </tr>
+        }
+       
+        
+    </tbody>
+</table>
