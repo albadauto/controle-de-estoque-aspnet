@@ -12,6 +12,11 @@
             @TempData["messageError"]
         </div>
     }
+
+   @if(ViewBag.Session != null)
+   {
+       <p>@ViewBag.Session</p>
+   }
     
     <div class="border border-dark p-5 mt-lg-5">
         <div class="text-center">

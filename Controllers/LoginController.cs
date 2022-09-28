@@ -13,7 +13,10 @@ namespace ControleDeEstoque.Controllers
         }
         public IActionResult Index()
         {
-           
+           if(HttpContext.Session.GetString("Teste") != null)
+            {
+                ViewBag.Session = HttpContext.Session.GetString("Teste");
+            }
             return View();
         }
 
@@ -27,7 +30,14 @@ namespace ControleDeEstoque.Controllers
                 TempData["messageError"] = "Erro";
                 return RedirectToAction("Index");
             }
+            HttpContext.Session.SetString("Teste", "teste");
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Logoff()
+        {
+            HttpContext.Session.Remove("Teste");
+            return RedirectToAction("Index");
         }
     }
 }
