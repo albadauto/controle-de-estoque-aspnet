@@ -30,7 +30,7 @@ namespace ControleDeEstoque.Controllers
                 TempData["messageError"] = "Erro";
                 return RedirectToAction("Index");
             }
-            HttpContext.Session.SetString("Teste", "teste");
+            HttpContext.Session.SetString("Teste", result.Name);
             return RedirectToAction("Index", "Home");
         }
 
